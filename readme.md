@@ -11,7 +11,9 @@ format and writes this to disk. The filename is this title of the video.
 Is also does it for a playlist, conveniently creating a list of subtitles.
 
 Example usage:
-Youtube2SRT -l:en https://www.youtube.com/watch?v=yLL6Tc02NHo&list=PLEXBGg5OB0B_VVQXo5IAKXGIxqsHIpBcq&index=2&t=0s
+Youtube2SRT -l:en "https://www.youtube.com/watch?v=yLL6Tc02NHo&list=PLEXBGg5OB0B_VVQXo5IAKXGIxqsHIpBcq&index=2&t=0s"
+
+Watch the quotes around the url they are needed most of the time!
 
 ### Warning
 

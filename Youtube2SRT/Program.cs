@@ -18,7 +18,9 @@ namespace Youtube2SRT
         public static string SubtitleLanguage = "";
 
         /// <summary>
-        /// https://www.youtube.com/watch?v=yLL6Tc02NHo&list=PLEXBGg5OB0B_VVQXo5IAKXGIxqsHIpBcq&index=2&t=0s
+        /// -l:en https://www.youtube.com/watch?v=yLL6Tc02NHo&list=PLEXBGg5OB0B_VVQXo5IAKXGIxqsHIpBcq&index=2&t=0s
+        /// 
+        /// -l:en https://www.youtube.com/watch?v=m-iU2P1TVGs&list=PLOptfeAQXRAUzoMgskbVVrs8FLK8sEPAU
         /// </summary>
         /// <param name="args"></param>
         static void Main(string[] args)
@@ -82,7 +84,6 @@ namespace Youtube2SRT
                 Environment.Exit(0);
             }
             
-
             Youtube y = new Youtube();
 
             List<PlaylistItem> playlistItems = null;
@@ -114,6 +115,9 @@ namespace Youtube2SRT
                 Environment.Exit(1);
             }
 
+            Console.WriteLine($"Found {playlistItems.Count} videos. Starting...");
+            Console.WriteLine();
+
             foreach (PlaylistItem item in playlistItems)
             {
                 Console.WriteLine($"VideoID: {item.VideoId} Title: {item.Title}");
@@ -144,10 +148,18 @@ namespace Youtube2SRT
                     } //foreach
                     if (count == 0)
                     {
-                        Console.Write("No subs");
+                        Console.Write("No subtitles found.");
                     }
-                    Console.WriteLine(".");
-
+                    else
+                    {
+                        Console.Write(".");
+                    }
+                    Console.WriteLine();
+                    
+                    if (defaultSubLanguage == null && languages.Count > 0)
+                    {
+                        defaultSubLanguage = languages[0];
+                    }
                     if (subLanguage == null)
                     {
                         subLanguage = defaultSubLanguage;

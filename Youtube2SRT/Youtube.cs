@@ -398,8 +398,7 @@ namespace Youtube2SRT
             }
             try
             {
-                string text = sb.ToString();// 1, sb.Length - 2);
-                text = "<?xml version=\"1.0\" encoding=\"utf-8\" ?><transcript_list docid=\"1061384631400866046\"><track id=\"0\" name=\"\" lang_code=\"en\" lang_original=\"English\" lang_translated=\"English\" lang_default=\"true\"/></transcript_list>";
+                string text = sb.ToString();
                 XmlDocument xmlDoc = new XmlDocument();
                 xmlDoc.LoadXml(text);
                 XmlNodeList xTranscriptList = xmlDoc.GetElementsByTagName("transcript_list");
@@ -414,7 +413,10 @@ namespace Youtube2SRT
                     YoutubeLanguage item = new YoutubeLanguage();
                     item.Language = xn.Attributes["lang_original"].Value.ToString();
                     item.ISO639_1 = xn.Attributes["lang_code"].Value.ToString();
-                    item.DefaultLanguage = (xn.Attributes["lang_default"].Value.ToString().ToLower() == "true");
+                    if (xn.Attributes["lang_default"] != null)
+                    {
+                        item.DefaultLanguage = (xn.Attributes["lang_default"].Value.ToString().ToLower() == "true");
+                    }
 
                     languages.Add(item);
                 } //foreach
